@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-typedef long long int lli;
-using namespace std;
-
 namespace math{
     const int SIEVE_SZ = 10e6 + 3;
     bool prime[SIEVE_SZ];
