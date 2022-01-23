@@ -28,7 +28,7 @@ namespace modop{
     }
     
     lli minv(lli a){
-        return mpow(a, MOD - 2);
+        return mpow(a, MOD - 2); //works only when modulo is prime
     }
 
     lli mdiv(lli a, lli b){
