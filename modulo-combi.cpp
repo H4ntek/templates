@@ -1,5 +1,6 @@
+const int MOD = 1e9 + 7, FACT_SZ = 2e6 + 3;
+
 namespace modop{
-    const int MOD = 1e9 + 7, FACT_SZ = 2e6 + 3;
     lli fact[FACT_SZ], inv_fact[FACT_SZ];
 
     lli madd(lli a, lli b){
