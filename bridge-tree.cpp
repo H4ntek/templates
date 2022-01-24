@@ -1,4 +1,7 @@
-//REQUIRES adj (graph) with pairs {u, edge_id}, list of edges, is_bridge, in, low, comp
+/*
+Bridge tree - condenses graph into a tree, where vertices are 2-edge-connected components and edges <==> bridges from the original graph.
+REQUIRES adj (graph) with pairs {u, edge_id}, list of edges, is_bridge, in, low, comp
+*/
 void DFS_bridges(int v, int par){
     in[v] = low[v] = timer++;
     int u, id;
