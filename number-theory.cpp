@@ -2,12 +2,6 @@ namespace math{
     const int SIEVE_SZ = 10e6 + 3;
     bool prime[SIEVE_SZ];
 
-    lli gcd(lli a, lli b){
-        if (a == 0) return b;
-        if (b == 0) return a;
-        return gcd(b, a % b);
-    }
-
     bool is_prime(lli n){
         if (n <= 1) return false;
         if (n <= 3) return true;
