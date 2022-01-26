@@ -3,8 +3,8 @@ CHANGE op AND neutral BEFORE USING
 OPTIONAL beggining array a (if there is one uncomment "build" function in init)
 Seg_tree st;
 st.init(n) - initializes a segment tree for array of size n
-st.query(1, 1, n, l, r) - returns query on [l, r]
-st.update(1, 1, n, i, v) - updates (adds or sets) a[i] to v
+st.query(1, 0, n - 1, l, r) - returns query on [l, r]
+st.update(1, 0, n - 1, i, v) - updates (adds or sets) a[i] to v
 */
 struct Seg_tree{
     const int INF_INT = 1e9 + 3;
