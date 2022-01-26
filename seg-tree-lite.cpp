@@ -52,7 +52,7 @@ struct Seg_tree{
         return op(query(2 * si, ss, mid, qs, qe), query(2 * si + 1, mid + 1, se, qs, qe));
     }
 
-    void update(int si, int ss, int se, int ui, int val){ 
+    void update(int si, int ss, int se, int ui, lli val){ 
         if (ss == se){
             st[si] = val;
             return;
