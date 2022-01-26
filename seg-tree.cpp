@@ -1,5 +1,5 @@
 /*
-ONE-BASED INDEXING, CHANGE op AND neutral BEFORE USING
+CHANGE op AND neutral BEFORE USING
 OPTIONAL beggining array a (if there is one uncomment "build" function in init)
 Seg_tree st;
 st.init(n) - initializes a segment tree for array of size n
@@ -10,19 +10,19 @@ struct Seg_tree{
     const int INF_INT = 1e9 + 3;
     const lli INF_LL = 1e18 + 3;
     int base;
-    vector <int> st, lazy;
+    vector <lli> st, lazy;
 
-    int op(int a, int b){ //max, min, sum, xor, gcd...
-        return a ^ b;
+    lli op(lli a, lli b){ //max, min, sum, xor, gcd...
+        return max(a, b);
     }
 
-    int neutral(){ //0 for sum, xor, gcd, -INF for max, INF for min
+    lli neutral(){ //0 for sum, xor, gcd, -INF for max, INF for min
         return 0;
     }
 
     void build(int si, int ss, int se){
         if (ss == se){
-            st[si] = a[ss];
+            //st[si] = a[ss];
             return;
         }
         int mid = (ss + se) / 2;
@@ -33,15 +33,15 @@ struct Seg_tree{
 
     void init(int n){
         base = 1;
-        while (base < n){
+        while (base <= n){
             base *= 2;
         }
         st.assign(2 * base, 0);
         lazy.assign(2 * base, 0);
-        build(1, 1, n);
+        //build(1, 0, n - 1);
     }
 
-    void propagate(int si, int ss, int se, int val){ //for other queries / += for add updates, = for set updates
+    void propagate(int si, int ss, int se, lli val){ //for other queries / += for add updates, = for set updates
         st[si] = val;
         if (ss != se){
             lazy[2 * si] = val;
@@ -49,7 +49,7 @@ struct Seg_tree{
         }
     }
 
-    void propagate_sum(int si, int ss, int se, int val){ //for sum queries / += for add updates, = for set updates
+    void propagate_sum(int si, int ss, int se, lli val){ //for sum queries / += for add updates, = for set updates
         st[si] = val * (se - ss + 1);
         if (ss != se){
             lazy[2 * si] = val;
@@ -57,7 +57,7 @@ struct Seg_tree{
         }
     }
 
-    int query(int si, int ss, int se, int qs, int qe){ 
+    lli query(int si, int ss, int se, int qs, int qe){ 
         if (lazy[si] != 0){
             propagate(si, ss, se, lazy[si]);
             lazy[si] = 0;
@@ -74,7 +74,7 @@ struct Seg_tree{
         return op(query(2 * si, ss, mid, qs, qe), query(2 * si + 1, mid + 1, se, qs, qe));
     }
 
-    void update(int si, int ss, int se, int us, int ue, int val){ 
+    void update(int si, int ss, int se, int us, int ue, lli val){ 
         if (lazy[si] != 0){
             propagate(si, ss, se, lazy[si]);
             lazy[si] = 0;
