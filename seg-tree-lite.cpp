@@ -1,5 +1,5 @@
 /*
-ONE-BASED INDEXING, CHANGE op AND neutral BEFORE USING
+CHANGE op AND neutral BEFORE USING
 OPTIONAL beggining array a (if there is one uncomment "build" function in init)
 Seg_tree st;
 st.init(n) - initializes a segment tree for array of size n
@@ -36,8 +36,8 @@ struct Seg_tree{
         while (base < n){
             base *= 2;
         }
-        st.assign(2 * base, 0);
-        //build(1, 1, n);
+        st.assign(2 * base, neutral());
+        //build(1, 0, n - 1);
     }
 
     int query(int si, int ss, int se, int qs, int qe){ 
