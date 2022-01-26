@@ -10,13 +10,13 @@ struct Seg_tree{
     const int INF_INT = 1e9 + 3;
     const lli INF_LL = 1e18 + 3;
     int base;
-    vector <int> st;
+    vector <lli> st;
 
-    int op(int a, int b){ //max, min, sum, xor, gcd...
+    lli op(lli a, lli b){ //max, min, sum, xor, gcd...
         return a + b;
     }
 
-    int neutral(){ //0 for sum, xor, gcd, -INF for max, INF for min
+    lli neutral(){ //0 for sum, xor, gcd, -INF for max, INF for min
         return 0;
     }
 
@@ -40,7 +40,7 @@ struct Seg_tree{
         //build(1, 0, n - 1);
     }
 
-    int query(int si, int ss, int se, int qs, int qe){ 
+    lli query(int si, int ss, int se, int qs, int qe){ 
         if (ss > qe || se < qs){
             return neutral();
         }
