@@ -33,7 +33,7 @@ struct Seg_tree{
 
     void init(int n){
         base = 1;
-        while (base <= n){
+        while (base < n){
             base *= 2;
         }
         st.assign(2 * base, neutral());
