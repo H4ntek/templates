@@ -4,6 +4,7 @@ LCA lca;
 lca.init(n) - init for a tree with n vertices
 lca.find_LCA(u, v) - returns LCA of u and v
 lca.get_dist(u, v) - return distance from u to v
+lca.get_anc(v, k) - returns k-th ancestor of v
 */
 struct LCA{
     int n, lg;
@@ -61,5 +62,18 @@ struct LCA{
 
     int get_dist(int u, int v){
         return depth[u] + depth[v] - 2 * depth[find_LCA(u, v)];
+    }
+
+    int get_anc(int v, int k){
+        if (depth[v] < k){
+            return -1;
+        }
+        int u = v;
+        for (int i = lg - 1; i >= 0; i--){
+            if (k & (1 << i)){
+                u = up[u][i];
+            }
+        }
+        return u;
     }
 };
