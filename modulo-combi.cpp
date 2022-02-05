@@ -1,61 +1,58 @@
 const int MOD = 1e9 + 7, FACT_SZ = 2e6 + 3;
 
-namespace modop{
-    lli fact[FACT_SZ], inv_fact[FACT_SZ];
+lli fact[FACT_SZ], inv_fact[FACT_SZ];
 
-    lli madd(lli a, lli b){
-        return (a + b) % MOD;
-    }
+lli madd(lli a, lli b){
+    return (a + b) % MOD;
+}
 
-    lli msub(lli a, lli b){
-        return ((a - b) % MOD + MOD) % MOD;
-    } 
+lli msub(lli a, lli b){
+    return ((a - b) % MOD + MOD) % MOD;
+} 
 
-    lli mmul(lli a, lli b){
-        return ((a % MOD) * (b % MOD)) % MOD;
-    }
+lli mmul(lli a, lli b){
+    return ((a % MOD) * (b % MOD)) % MOD;
+}
 
-    lli mpow(lli a, lli b){
-        lli res = 1;
-        a %= MOD;
-        while (b){
-            if (b % 2 == 1){
-                res = mmul(res, a);
-            }
-            b /= 2;
-            a = mmul(a, a);
+lli mpow(lli a, lli b){
+    lli res = 1;
+    a %= MOD;
+    while (b){
+        if (b % 2 == 1){
+            res = mmul(res, a);
         }
-        return res;
+        b /= 2;
+        a = mmul(a, a);
     }
-    
-    lli minv(lli a){
-        return mpow(a, MOD - 2); //works only when modulo is prime
-    }
+    return res;
+}
 
-    lli mdiv(lli a, lli b){
-        return mmul(a, minv(b));
-    }
+lli minv(lli a){
+    return mpow(a, MOD - 2); //works only when modulo is prime
+}
 
-    bool generated = false;
-    void gen_fact(int n){
-        generated = true;
-        fact[0] = fact[1] = inv_fact[0] = inv_fact[1] = 1;
-        for (int i = 2; i <= n; i++){
-            fact[i] = mmul(fact[i - 1], (lli) i);
-        }
-        inv_fact[n] = minv(fact[n]);
-        for (int i = n - 1; i >= 2; i--){
-            inv_fact[i] = mmul(inv_fact[i + 1], (lli) (i + 1));
-        }
-    }
+lli mdiv(lli a, lli b){
+    return mmul(a, minv(b));
+}
 
-    lli nck(lli n, lli k){
-        if (!generated || n < 0 || k > n){
-            cout << "Error, invalid argument or factorials not generated.\n";
-            return 0;
-        }
-        lli denom = mmul(inv_fact[k], inv_fact[n - k]);
-        return mmul(fact[n], denom);
+bool generated = false;
+void gen_fact(int n){
+    generated = true;
+    fact[0] = fact[1] = inv_fact[0] = inv_fact[1] = 1;
+    for (int i = 2; i <= n; i++){
+        fact[i] = mmul(fact[i - 1], (lli) i);
+    }
+    inv_fact[n] = minv(fact[n]);
+    for (int i = n - 1; i >= 2; i--){
+        inv_fact[i] = mmul(inv_fact[i + 1], (lli) (i + 1));
     }
 }
-using namespace modop;
+
+lli nck(lli n, lli k){
+    if (!generated || n < 0 || k > n){
+        cout << "Error, invalid argument or factorials not generated.\n";
+        return 0;
+    }
+    lli denom = mmul(inv_fact[k], inv_fact[n - k]);
+    return mmul(fact[n], denom);
+}
