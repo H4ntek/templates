@@ -1,0 +1,2 @@
+Catch a lot of errors: alias comp='make CXXFLAGS="-std=c++17 -Wall -Wextra -O3 -fsanitize=address,undefined"'
+Compile like in OI: alias comp_oi='make CXXFLAGS="-O3 -static -std=c++17"'
