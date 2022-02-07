@@ -2,7 +2,7 @@ Catch a lot of errors: alias comp='make CXXFLAGS="-std=c++17 -Wall -Wextra -O3 -
 Compile like in OI: alias comp_oi='make CXXFLAGS="-O3 -static -std=c++17"'
 
 ***
-CZYTAJ TREEEEEŚCI
+CZYTAJ TREŚCI
 ***
 
 STL: https://www.cplusplus.com/reference
