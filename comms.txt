@@ -6,6 +6,7 @@ CZYTAJ TREŚCI
 ***
 
 STL: https://www.cplusplus.com/reference
+Vector 2D: vector<vector<int>> vec(n, vector<int> (m, 0));
 
 TESTOWANIE:
 - MAŁE WARTOŚCI - (3 - 20 elementów w tablicy, wierzchołków grafu, żeby można było sprawdzić brutem)
