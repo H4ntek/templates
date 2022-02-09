@@ -1,10 +1,5 @@
 /*
-REQUIRES adj (pairs {child, wgt})
-Dijkstra dij;
-dij.init(n) - init for graph of size n
-dij.run(src) - run Dijkstra from src
-dij.recover_path(v) - recovers path from src to v
-dij.get_path_len(v) - returns distace (src, v)
+Requires adj (pairs {child, wgt})
 */
 struct Dijkstra{
     const lli INF = 1e18 + 3;
