@@ -8,7 +8,7 @@ struct SlidingWin{
     
     void push(int x){
         if (!s2.empty()){
-            s2.emplace_back(x, op(x, s2.back().ff));
+            s2.emplace_back(x, op(x, s2.back().ss));
         }
         else{
             s2.emplace_back(x, x);
