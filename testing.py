@@ -1,7 +1,7 @@
 from random import *
 
-TYPES_OF_TREE = ["NORMAL", "NORMAL", "NORMAL", "STAR", "LINE", "CATERPILLAR"]
-MAXN = 20
+MAXN = 11
+MAXW = 100
 n = randint(1, MAXN)
 
 def gen_array(n, low, high, repetitions = True):
@@ -20,7 +20,7 @@ def gen_array(n, low, high, repetitions = True):
     print("")
 
 
-def gen_tree(n, typ = "NORMAL"):
+def gen_tree(n, typ = "NORMAL", weighted = False):
     edges = []
     perm = [0]
     temp = [i for i in range(1, n + 1)]
@@ -74,6 +74,50 @@ def gen_tree(n, typ = "NORMAL"):
         edge[1] = perm[edge[1]]
     shuffle(edges)
 
-    print(n)
+    print(f"{n} {n - 1}")
+    if weighted:
+        for edge in edges:
+            print(f"{edge[0]} {edge[1]} {randint(1, MAXW)}")
+    else:
+        for edge in edges:
+            print(f"{edge[0]} {edge[1]}")
+
+def gen_graph(n, typ1 = "NORMAL", weighted = False, directed = False):
+    edges = []
+    perm = [0]
+    temp = [i for i in range(1, n + 1)]
+    shuffle(temp)
+    perm += temp
+
+    if typ1 == "NORMAL":
+        prob = [[random() for _ in range(n + 1)] for _ in range(n + 1)]
+    elif typ1 == "SPARSE":
+        prob = [[uniform(0, 0.33) for _ in range(n + 1)] for _ in range(n + 1)]
+    elif typ1 == "DENSE":
+        prob = [[uniform(0.66, 1) for _ in range(n + 1)] for _ in range(n + 1)]
+
+    if not directed:
+        for i in range(1, n + 1):
+            for j in range(i + 1, n + 1):
+                if random() <= prob[i][j]: 
+                    edges.append([i, j])
+    else:
+        for i in range(1, n + 1):
+            for j in range(1, n + 1):
+                if i == j:
+                    continue
+                elif random() <= prob[i][j]:
+                    edges.append([i, j])
+
     for edge in edges:
-        print(f"{edge[0]} {edge[1]}")
+        edge[0] = perm[edge[0]]
+        edge[1] = perm[edge[1]]
+    shuffle(edges)
+
+    print(f"{n} {len(edges)}")
+    if weighted:
+        for edge in edges:
+            print(f"{edge[0]} {edge[1]} {randint(1, MAXW)}")
+    else:
+        for edge in edges:
+            print(f"{edge[0]} {edge[1]}")
