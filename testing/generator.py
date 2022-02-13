@@ -1,6 +1,6 @@
 from random import *
 
-MAXN = 11
+MAXN = 10
 MAXW = 100
 n = randint(1, MAXN)
 
@@ -20,7 +20,7 @@ def gen_array(n, low, high, repetitions = True):
     print("")
 
 
-def gen_tree(n, typ = "NORMAL", weighted = False):
+def gen_tree(n, typ = "NORMAL", weighted = False, make_complete_graph = False):
     edges = []
     perm = [0]
     temp = [i for i in range(1, n + 1)]
@@ -68,13 +68,20 @@ def gen_tree(n, typ = "NORMAL", weighted = False):
                 edges.append([i, parent])
             else:
                 edges.append([parent, i])
-
+    
+    if make_complete_graph:
+        for i in range(1, n + 1):
+            for j in range(i + 1, n + 1):
+                if [i, j] not in edges and [j, i] not in edges:
+                    if random() < 0.4:
+                        edges.append([i, j])
+    
     for edge in edges:
         edge[0] = perm[edge[0]]
         edge[1] = perm[edge[1]]
     shuffle(edges)
 
-    print(f"{n} {n - 1}")
+    print(f"{n} {len(edges)}")
     if weighted:
         for edge in edges:
             print(f"{edge[0]} {edge[1]} {randint(1, MAXW)}")
