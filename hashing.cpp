@@ -50,7 +50,7 @@ struct Hash{
         return occs;
     }
 
-    int count_unique(){
+    int count_unique(){ //returns count of unique substrings of s
         int cnt = 0;
         for (int l = 1; l <= n; l++) {
             set <lli> hs;
