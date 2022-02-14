@@ -49,4 +49,18 @@ struct Hash{
         }
         return occs;
     }
+
+    int count_unique(){
+        int cnt = 0;
+        for (int l = 1; l <= n; l++) {
+            set <lli> hs;
+            for (int i = 0; i <= n - l; i++) {
+                lli cur_h = (hsh1[i + l] + MOD1 - hsh1[i]) % MOD1;
+                cur_h = (cur_h * pot1[n - i - 1]) % MOD1;
+                hs.insert(cur_h);
+            }
+            cnt += hs.size();
+        }
+        return cnt;
+    }
 };
