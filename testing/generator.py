@@ -1,6 +1,6 @@
 from random import *
 
-MAXN = 10
+MAXN = 20
 MAXW = 100
 n = randint(1, MAXN)
 
@@ -20,7 +20,7 @@ def gen_array(n, low, high, repetitions = True):
     print("")
 
 
-def gen_tree(n, typ = "NORMAL", weighted = False, make_complete_graph = False):
+def gen_tree(n, typ = "NORMAL", weighted = False, make_connected_graph = False):
     edges = []
     perm = [0]
     temp = [i for i in range(1, n + 1)]
@@ -69,7 +69,7 @@ def gen_tree(n, typ = "NORMAL", weighted = False, make_complete_graph = False):
             else:
                 edges.append([parent, i])
     
-    if make_complete_graph:
+    if make_connected_graph:
         for i in range(1, n + 1):
             for j in range(i + 1, n + 1):
                 if [i, j] not in edges and [j, i] not in edges:
@@ -89,32 +89,38 @@ def gen_tree(n, typ = "NORMAL", weighted = False, make_complete_graph = False):
         for edge in edges:
             print(f"{edge[0]} {edge[1]}")
 
-def gen_graph(n, typ1 = "NORMAL", weighted = False, directed = False):
+def gen_graph(n, typ1 = "NORMAL", weighted = False, directed = False, complete = False):
     edges = []
     perm = [0]
     temp = [i for i in range(1, n + 1)]
     shuffle(temp)
     perm += temp
 
-    if typ1 == "NORMAL":
-        prob = [[random() for _ in range(n + 1)] for _ in range(n + 1)]
-    elif typ1 == "SPARSE":
-        prob = [[uniform(0, 0.33) for _ in range(n + 1)] for _ in range(n + 1)]
-    elif typ1 == "DENSE":
-        prob = [[uniform(0.66, 1) for _ in range(n + 1)] for _ in range(n + 1)]
-
-    if not directed:
+    if complete:
         for i in range(1, n + 1):
             for j in range(i + 1, n + 1):
-                if random() <= prob[i][j]: 
-                    edges.append([i, j])
+                edges.append([i, j])
+        
     else:
-        for i in range(1, n + 1):
-            for j in range(1, n + 1):
-                if i == j:
-                    continue
-                elif random() <= prob[i][j]:
-                    edges.append([i, j])
+        if typ1 == "NORMAL":
+            prob = [[random() for _ in range(n + 1)] for _ in range(n + 1)]
+        elif typ1 == "SPARSE":
+            prob = [[uniform(0, 0.33) for _ in range(n + 1)] for _ in range(n + 1)]
+        elif typ1 == "DENSE":
+            prob = [[uniform(0.66, 1) for _ in range(n + 1)] for _ in range(n + 1)]
+    
+        if not directed:
+            for i in range(1, n + 1):
+                for j in range(i + 1, n + 1):
+                    if random() <= prob[i][j]: 
+                        edges.append([i, j])
+        else:
+            for i in range(1, n + 1):
+                for j in range(1, n + 1):
+                    if i == j:
+                        continue
+                    elif random() <= prob[i][j]:
+                        edges.append([i, j])
 
     for edge in edges:
         edge[0] = perm[edge[0]]
