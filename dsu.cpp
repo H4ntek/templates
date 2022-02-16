@@ -24,8 +24,8 @@ struct DSU{
     }
  
     void merge(int a, int b){
-        a = par[a];
-        b = par[b];
+        a = find(a);
+        b = find(b);
         if (a == b){
             return;
         }
