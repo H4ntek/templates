@@ -37,6 +37,16 @@ Mat mat_mpow(Mat A, lli n){
 	return res;
 }
 
+vector <lli> v_mat_mmul(vector <lli> v, Mat A){
+	vector <lli> res(SZ);
+	for (int i = 0; i < SZ; i++){
+		for (int j = 0; j < SZ; j++){
+			res[i] = madd(res[i], mmul(A[i][j], v[j]));
+		}
+	}
+	return res;
+}
+
 void mat_print(Mat A){
 	for (int i = 0; i < SZ; i++){
 		for (int j = 0; j < SZ; j++){
