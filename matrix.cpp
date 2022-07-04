@@ -57,3 +57,6 @@ void mat_print(Mat A){
 }
 
 // Fibonacci: v_0 = {F_0, F_1} = {0, 1}, A = {{0, 1}, {1, 1}}, v_n = {F_n, F_(n+1)} = v_0 * A^n
+// Recursion: F_n = c_(k-1)*F_(n-1) + c_(k-2)*F_(n-2) + ... + c_0*F_(n-k)
+// bottom row of transformation matrix = {c_0, c_1, ..., c_(k-1)}
+// other rows = {0, 0, ..., 1, ..., 0, 0} - '1' in (k-i+1)-th position if the row is i-th from the bottom
