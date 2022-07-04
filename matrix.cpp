@@ -55,3 +55,5 @@ void mat_print(Mat A){
 		cout << "\n";
 	}
 }
+
+// Fibonacci: v_0 = {F_0, F_1} = {0, 1}, A = {{0, 1}, {1, 1}}, v_n = {F_n, F_(n+1)} = v_0 * A^n
